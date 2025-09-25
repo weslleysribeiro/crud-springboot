@@ -2,14 +2,14 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven3' // Nome da instalação do Maven no Jenkins
-        jdk 'Java21'   // Nome da instalação do JDK no Jenkins
+        maven 'maven' // Nome da instalação do Maven no Jenkins
+        jdk 'jdk-21'   // Nome da instalação do JDK no Jenkins
     }
 
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/weslleysribeiro/crud-springboot'
+                git branch: 'main', url: 'https://github.com/weslleysribeiro/crud-springboot.git'
             }
         }
 
