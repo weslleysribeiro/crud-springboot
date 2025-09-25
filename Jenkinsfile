@@ -28,8 +28,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 // Deploy para cloud
-                sh 'docker build -t crud-springboot:latest .' // Se usar Docker
-                sh 'docker run -d -p 8080:8080 crud-springboot:latest'
+                //sh 'docker build -t crud-springboot:latest .' // Se usar Docker
+                //sh 'docker run -d -p 8080:8080 crud-springboot:latest'
             }
         }
     }
