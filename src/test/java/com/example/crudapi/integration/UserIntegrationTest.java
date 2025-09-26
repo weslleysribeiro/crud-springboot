@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
 
@@ -61,9 +62,14 @@ class UserIntegrationTest {
 		// Delete
 		rest.delete(baseUrl() + "/" + id);
 
+
 		// Ensure 404 after delete
-		ResponseEntity<String> afterDelete = rest.getForEntity(baseUrl() + "/" + id, String.class);
-		assertThat(afterDelete.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+		try {
+			rest.getForEntity(baseUrl() + "/" + id, String.class);
+			throw new AssertionError("Expected 404 after delete");
+		} catch (HttpClientErrorException e) {
+			assertThat(e.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+		}
 	}
 }
 
